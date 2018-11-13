@@ -13,7 +13,8 @@
 	<property name="server.url" location="http://192.168.1.15:8080"/>
 	<property name="tomcat.deployer.id" location="deployer"/>
 	<property name="tomcat.deployer.pw" location="deployer"/>
-	<property name="deployer.lib.path" location="C:\hanwha\apache-tomcat-7.0.75\lib"/>
+	<!-- property name="deployer.lib.path" location="C:\hanwha\apache-tomcat-7.0.75\lib"/ -->
+	<property name="deployer.lib.path" location="/home/kiea/tain/apache/apache-tomcat-7.0.91/lib"/>
 	<path id="deployer.class.path">
 		<fileset dir="${deployer.lib.path}">
 			<include name="catalina-ant.jar"/>
@@ -84,7 +85,7 @@
     	
     </target>
     <target depends="clean" name="cleanall"/>
-    <target depends="build-subprojects,build-project" name="build"/>
+    <target depends="cleanall, build-subprojects, build-project" name="build"/>
     <target name="build-subprojects"/>
     <target depends="init" name="build-project">
         <echo message="${ant.project.name}: ${ant.file}"/>
@@ -104,7 +105,8 @@
     -->
 	
 	
-	<target name="make-warfile" depends="build-project">
+	<!-- target name="make-warfile" depends="build-project" -->
+	<target name="make-warfile" depends="build">
 		<mkdir dir="${war.path}"/>
 		<copy todir="${war.path}">
 			<fileset dir="${content.path}">
